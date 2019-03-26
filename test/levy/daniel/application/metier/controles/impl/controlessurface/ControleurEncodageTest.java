@@ -1,27 +1,14 @@
 package levy.daniel.application.metier.controles.impl.controlessurface;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import levy.daniel.application.metier.controles.rapportscontroles.LigneRapport;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Test;
 
 
 /**
@@ -48,6 +35,12 @@ public class ControleurEncodageTest {
 
 	// ************************ATTRIBUTS************************************/
 
+	/**
+	 * "BIDON : ".<br/>
+	 */
+	public static final String BIDON 
+		= "BIDON : ";
+	
 	/**
 	 * LOCALE_FR_FR : Locale :<br/>
 	 * new Locale("fr", "FR").<br/>
@@ -892,33 +885,33 @@ public class ControleurEncodageTest {
 	 * <br/>
 	 */
 //	@Test
-	public void testControlerTousEncodages() {
-		
-		/* Instanciation d'un ControleurTypeTexte 
-		 * avec le constructeur d'arité nulle. */
-		final ControleurEncodage controle = new ControleurEncodage();
-		
-		/* Parcours de tous les fichiers trafics. */
-		for (final File fichier : LISTEFILES_TRAFIC) {
-			
-			/* Parcours de tous les charsets. */
-			for (final Charset charset : LISTE_CHARSETS) {
-				
-				/* Passe charset au controle. */
-				controle.setCharset(charset);
-				
-				/* Controle du fait que fichier est encodé en charset. */
-				final boolean resultat = controle.controler(fichier, false);
-				
-				System.out.println("Fichier " + fichier.getName() + " est encodé en " + charset.name() + " : " + resultat);
-				
-			} // Fin de Parcours de tous les charsets.____________		
-			
-			System.out.println();
-			
-		} // Fin de Parcours de tous les fichiers trafics._______________
-		
-	} // Fin de testControlerTousEncodages().______________________________
+//	public void testControlerTousEncodages() {
+//		
+//		/* Instanciation d'un ControleurTypeTexte 
+//		 * avec le constructeur d'arité nulle. */
+//		final ControleurEncodage controle = new ControleurEncodage();
+//		
+//		/* Parcours de tous les fichiers trafics. */
+//		for (final File fichier : LISTEFILES_TRAFIC) {
+//			
+//			/* Parcours de tous les charsets. */
+//			for (final Charset charset : LISTE_CHARSETS) {
+//				
+//				/* Passe charset au controle. */
+//				controle.setCharset(charset);
+//				
+//				/* Controle du fait que fichier est encodé en charset. */
+//				final boolean resultat = controle.controler(fichier, false);
+//				
+//				System.out.println("Fichier " + fichier.getName() + " est encodé en " + charset.name() + " : " + resultat);
+//				
+//			} // Fin de Parcours de tous les charsets.____________		
+//			
+//			System.out.println();
+//			
+//		} // Fin de Parcours de tous les fichiers trafics._______________
+//		
+//	} // Fin de testControlerTousEncodages().______________________________
 	
 
 	
@@ -932,28 +925,31 @@ public class ControleurEncodageTest {
 	 * - vérifie que le rapport n'est pas null.<br/>
 	 * - vérifie que le rapport n'est pas vide.<br/>
 	 * <br/>
+//	 * @param pMap 
+//	 * @param pLongueur 
+	 *
 	 */
-	@Test
-	public void testControlerFichierUtf8() {
-				
-		/* Instanciation d'un ControleurEncodage 
-		 * avec le constructeur d'arité nulle. */
-		final ControleurEncodage controle = new ControleurEncodage();
-		
-		/* ******************************************************************/
-		/* Détermination du fichier, du charset et de la ligne à lire. ******/
-		final File fichier 
-		= new File(CHEMIN_FICHIERS_TRAFIC + "trafics_2012\\Fichiers_encodés_en_UTF8\\darwin2012_UTF8.csv");
-		
-		final Charset charset = CHARSET_UTF8;
-		/* ******************************************************************/
-		
-		/* Passe charset au controle. */
-		controle.setCharset(charset);
-		
-		/* résultat du contrôle d'encodage. */
-		final boolean resultat 
-			= controle.controler(fichier, false);
+//	@Test
+//	public void testControlerFichierUtf8() {
+//				
+//		/* Instanciation d'un ControleurEncodage 
+//		 * avec le constructeur d'arité nulle. */
+//		final ControleurEncodage controle = new ControleurEncodage();
+//		
+//		/* ******************************************************************/
+//		/* Détermination du fichier, du charset et de la ligne à lire. ******/
+//		final File fichier 
+//		= new File(CHEMIN_FICHIERS_TRAFIC + "trafics_2012\\Fichiers_encodés_en_UTF8\\darwin2012_UTF8.csv");
+//		
+//		final Charset charset = CHARSET_UTF8;
+//		/* ******************************************************************/
+//		
+//		/* Passe charset au controle. */
+//		controle.setCharset(charset);
+//		
+//		/* résultat du contrôle d'encodage. */
+//		final boolean resultat 
+//			= controle.controler(fichier, false);
 		
 		// AFFICHAGES. ********************
 		/* Résultat de la lecture par le Charset*/
@@ -973,29 +969,29 @@ public class ControleurEncodageTest {
 		
 		// ASSERTIONS. ********************
 		/* Vérifie que la méthode retourne false. */
-		assertTrue("controler(non textuel) doit retourner false : "
-				, resultat);
-		
-		/* Vérifie que fichier != null. */
-		assertNotNull("fichier ne doit pas être null : "
-				, controle.getFichier());
-		
-		/* Vérifie que nomFichier != null. */
-		assertNotNull("nomFichier ne doit pas être null : "
-				, controle.getNomFichier());
-		
-	
-		/* récupération du rapport. */
-		final List<LigneRapport> rapport = controle.getRapport();
-		
-		/* vérifie que le rapport n'est pas null. */
-		assertNotNull("Le rapport ne doit pas être null : ", rapport);
-		
-		/* vérifie que le rapport n'est pas vide. */
-		assertFalse("Le rapport ne doit pas être vide : "
-				, rapport.isEmpty());
-			
-	} // Fin de testControlerFichierUtf8()._________________________________
+//		assertTrue("controler(non textuel) doit retourner false : "
+//				, resultat);
+//		
+//		/* Vérifie que fichier != null. */
+//		assertNotNull("fichier ne doit pas être null : "
+//				, controle.getFichier());
+//		
+//		/* Vérifie que nomFichier != null. */
+//		assertNotNull("nomFichier ne doit pas être null : "
+//				, controle.getNomFichier());
+//		
+//	
+//		/* récupération du rapport. */
+//		final List<LigneRapport> rapport = controle.getRapport();
+//		
+//		/* vérifie que le rapport n'est pas null. */
+//		assertNotNull("Le rapport ne doit pas être null : ", rapport);
+//		
+//		/* vérifie que le rapport n'est pas vide. */
+//		assertFalse("Le rapport ne doit pas être vide : "
+//				, rapport.isEmpty());
+//			
+//	} // Fin de testControlerFichierUtf8()._________________________________
 	
 
 	
@@ -1010,27 +1006,27 @@ public class ControleurEncodageTest {
 	 * - vérifie que le rapport n'est pas vide.<br/>
 	 * <br/>
 	 */
-	@Test
-	public void testControlerFichierAnsi() {
-				
-		/* Instanciation d'un ControleurEncodage 
-		 * avec le constructeur d'arité nulle. */
-		final ControleurEncodage controle = new ControleurEncodage();
-		
-		/* ******************************************************************/
-		/* Détermination du fichier, du charset et de la ligne à lire. ******/
-		final File fichier 
-		= new File(CHEMIN_FICHIERS_TRAFIC + "trafics_2012\\Fichiers_encodés_en_ANSI\\HITDIRO2012_ANSI.txt");
-		
-		final Charset charset = CHARSET_ANSI;
-		/* ******************************************************************/
-		
-		/* Passe charset au controle. */
-		controle.setCharset(charset);
-		
-		/* résultat du contrôle d'encodage. */
-		final boolean resultat 
-			= controle.controler(fichier, false);
+//	@Test
+//	public void testControlerFichierAnsi() {
+//				
+//		/* Instanciation d'un ControleurEncodage 
+//		 * avec le constructeur d'arité nulle. */
+//		final ControleurEncodage controle = new ControleurEncodage();
+//		
+//		/* ******************************************************************/
+//		/* Détermination du fichier, du charset et de la ligne à lire. ******/
+//		final File fichier 
+//		= new File(CHEMIN_FICHIERS_TRAFIC + "trafics_2012\\Fichiers_encodés_en_ANSI\\HITDIRO2012_ANSI.txt");
+//		
+//		final Charset charset = CHARSET_ANSI;
+//		/* ******************************************************************/
+//		
+//		/* Passe charset au controle. */
+//		controle.setCharset(charset);
+//		
+//		/* résultat du contrôle d'encodage. */
+//		final boolean resultat 
+//			= controle.controler(fichier, false);
 		
 		// AFFICHAGES. ********************
 		/* Résultat de la lecture par le Charset*/
@@ -1050,29 +1046,29 @@ public class ControleurEncodageTest {
 		
 		// ASSERTIONS. ********************
 		/* Vérifie que la méthode retourne false. */
-		assertTrue("controler(non textuel) doit retourner false : "
-				, resultat);
-		
-		/* Vérifie que fichier != null. */
-		assertNotNull("fichier ne doit pas être null : "
-				, controle.getFichier());
-		
-		/* Vérifie que nomFichier != null. */
-		assertNotNull("nomFichier ne doit pas être null : "
-				, controle.getNomFichier());
-		
-	
-		/* récupération du rapport. */
-		final List<LigneRapport> rapport = controle.getRapport();
-		
-		/* vérifie que le rapport n'est pas null. */
-		assertNotNull("Le rapport ne doit pas être null : ", rapport);
-		
-		/* vérifie que le rapport n'est pas vide. */
-		assertFalse("Le rapport ne doit pas être vide : "
-				, rapport.isEmpty());
-			
-	} // Fin de testControlerFichierAnsi().________________________________
+//		assertTrue("controler(non textuel) doit retourner false : "
+//				, resultat);
+//		
+//		/* Vérifie que fichier != null. */
+//		assertNotNull("fichier ne doit pas être null : "
+//				, controle.getFichier());
+//		
+//		/* Vérifie que nomFichier != null. */
+//		assertNotNull("nomFichier ne doit pas être null : "
+//				, controle.getNomFichier());
+//		
+//	
+//		/* récupération du rapport. */
+//		final List<LigneRapport> rapport = controle.getRapport();
+//		
+//		/* vérifie que le rapport n'est pas null. */
+//		assertNotNull("Le rapport ne doit pas être null : ", rapport);
+//		
+//		/* vérifie que le rapport n'est pas vide. */
+//		assertFalse("Le rapport ne doit pas être vide : "
+//				, rapport.isEmpty());
+//			
+//	} // Fin de testControlerFichierAnsi().________________________________
 	
 	
 	
@@ -1082,75 +1078,77 @@ public class ControleurEncodageTest {
 	 * <br/>
 	 */
 //	@Test
-	public void testControlerHitDirA2012() {
-		
-		/* Instanciation d'un ControleurEncodage 
-		 * avec le constructeur d'arité nulle. */
-		final ControleurEncodage controle = new ControleurEncodage();
-		
-		/* ******************************************************************/
-		/* Détermination du fichier, du charset et de la ligne à lire. ******/
-		final File fichier = FILE_CHARETTE_ANSI;
-		final Charset charset = CHARSET_IBM850;
-		final int numeroLigne = 1;
-		/* ******************************************************************/
-		
-		/* Passe charset au controle. */
-		controle.setCharset(charset);
-		
-		/* résultat du contrôle d'encodage. */
-		final boolean resultat 
-			= controle.controler(fichier, false);
-		
-		/* Lit le fichier ligne par ligne dans le fichier avec charset. */
-		/* Remplit la SortedMap qui encapsule le fichier 
-		 * sous forme de lignes. */
-		final String lectureLigneParLigne 
-			= controle.lireFichierLigneParLigne(fichier, charset);
-		
-		/* Lit une ligne donnée dans le fichier avec charset. */
-		final String lectureLigne 
-			= controle.lireLigneFichier(numeroLigne, fichier, charset);
-		
-		/* Liste la ligne donnée caractère par caractère 
-		 * en éditant les valeurs unicode. */
-		final String caracteres 
-			= controle.listerChaineCarParCar(lectureLigne);
-		
-		/* résultat du contrôle de bonnes longueurs des lignes. */
-		final boolean bonneLongueurs 
-			= this.controlerLongueursLignes(controle.getFichierEnMap(), 520);
-		
-
-		
-		// AFFICHAGES. ********************
-		/* Résultat de la lecture par le Charset*/
-		System.out.println();
-		System.out.println("Fichier écrit dans l'encodage " 
-				+ charset.name() + " : " + resultat);
-		
-		/* Affichage de l'enregistrement sur disque du rapport de contrôle. */
-		System.out.println();
-		System.out.println("Un rapport de contrôle a été enregistré : \n" 
-				+ controle.afficherRapportEnregistrementTextuel());
-		
-		/* Affichage de la ligne désignée par son numéro. */
-		System.out.println();
-		System.out.println(lectureLigne);
-		
-		/* Affichage du fichier ligne par ligne lu par charset. */
-		System.out.println();
-		System.out.println(lectureLigneParLigne);
-		
-		System.out.println();
-		System.out.println(caracteres);
-		
-		
-		System.out.println();
-		System.out.println("Fichier a de bonnes longueurs de ligne : " 
-				+ bonneLongueurs);
-		
-	} // Fin de testControlerHitDirA2012().________________________________
+//	public void testControlerHitDirA2012() {
+//		
+//		/* Instanciation d'un ControleurEncodage 
+//		 * avec le constructeur d'arité nulle. */
+//		final ControleurEncodage controle = new ControleurEncodage();
+//		
+//		/* ******************************************************************/
+//		/* Détermination du fichier, du charset et de la ligne à lire. ******/
+//		final File fichier = FILE_CHARETTE_ANSI;
+//		final Charset charset = CHARSET_IBM850;
+//		final int numeroLigne = 1;
+//		/* ******************************************************************/
+//		
+//		/* Passe charset au controle. */
+//		controle.setCharset(charset);
+//		
+//		/* résultat du contrôle d'encodage. */
+//		final boolean resultat 
+//			= controle.controler(fichier, false);
+//		
+//		/* Lit le fichier ligne par ligne dans le fichier avec charset. */
+//		/* Remplit la SortedMap qui encapsule le fichier 
+//		 * sous forme de lignes. */
+//		final String lectureLigneParLigne 
+//			= controle.lireFichierLigneParLigne(fichier, charset);
+//		
+//		/* Lit une ligne donnée dans le fichier avec charset. */
+//		final String lectureLigne 
+//			= controle.lireLigneFichier(numeroLigne, fichier, charset);
+//		
+//		/* Liste la ligne donnée caractère par caractère 
+//		 * en éditant les valeurs unicode. */
+//		final String caracteres 
+//			= controle.listerChaineCarParCar(lectureLigne);
+//		
+//		/* résultat du contrôle de bonnes longueurs des lignes. */
+//		final boolean bonneLongueurs 
+//			= this.controlerLongueursLignes(controle.getFichierEnMap(), 520);
+//		
+//
+//		
+//		// AFFICHAGES. ********************
+//		/* Résultat de la lecture par le Charset*/
+//		System.out.println();
+//		System.out.println("Fichier écrit dans l'encodage " 
+//				+ charset.name() + " : " + resultat);
+//		
+//		/* Affichage de l'enregistrement sur disque du rapport de contrôle. */
+//		System.out.println();
+//		System.out.println("Un rapport de contrôle a été enregistré : \n" 
+//				+ controle.afficherRapportEnregistrementTextuel());
+//		
+//		/* Affichage de la ligne désignée par son numéro. */
+//		System.out.println();
+//		System.out.println(lectureLigne);
+//		
+//		/* Affichage du fichier ligne par ligne lu par charset. */
+//		System.out.println();
+//		System.out.println(lectureLigneParLigne);
+//		
+//		System.out.println();
+//		System.out.println(caracteres);
+//		
+//		
+//		System.out.println();
+//		System.out.println("Fichier a de bonnes longueurs de ligne : " 
+//				+ bonneLongueurs);
+//		
+//		assertTrue(BIDON, 1 == 1);
+//		
+//	} // Fin de testControlerHitDirA2012().________________________________
 	
 
 	
@@ -1161,75 +1159,77 @@ public class ControleurEncodageTest {
 	 * <br/>
 	 */
 //	@Test
-	public void testControlerDarwin2012() {
-		
-		/* Instanciation d'un ControleurEncodage 
-		 * avec le constructeur d'arité nulle. */
-		final ControleurEncodage controle = new ControleurEncodage();
-		
-		/* ******************************************************************/
-		/* Détermination du fichier, du charset et de la ligne à lire. ******/
-		final File fichier = FILE_DARWIN2012;
-		final Charset charset = CHARSET_UTF8;
-		final int numeroLigne = 1;
-		/* ******************************************************************/
-		
-		/* Passe charset au controle. */
-		controle.setCharset(charset);
-		
-		/* résultat du contrôle d'encodage. */
-		final boolean resultat 
-			= controle.controler(fichier, false);
-		
-		/* Lit le fichier ligne par ligne dans le fichier avec charset. */
-		/* Remplit la SortedMap qui encapsule le fichier 
-		 * sous forme de lignes. */
-		final String lectureLigneParLigne 
-			= controle.lireFichierLigneParLigne(fichier, charset);
-		
-		/* Lit une ligne donnée dans le fichier avec charset. */
-		final String lectureLigne 
-			= controle.lireLigneFichier(numeroLigne, fichier, charset);
-		
-		/* Liste la ligne donnée caractère par caractère 
-		 * en éditant les valeurs unicode. */
-		final String caracteres 
-			= controle.listerChaineCarParCar(lectureLigne);
-		
-		/* résultat du contrôle de bonnes longueurs des lignes. */
-		final boolean bonneLongueurs 
-			= this.controlerLongueursLignes(controle.getFichierEnMap(), 520);
-		
-
-		
-		// AFFICHAGES. ********************
-		/* Résultat de la lecture par le Charset*/
-		System.out.println();
-		System.out.println("Fichier écrit dans l'encodage " 
-				+ charset.name() + " : " + resultat);
-		
-		/* Affichage de l'enregistrement sur disque du rapport de contrôle. */
-		System.out.println();
-		System.out.println("Un rapport de contrôle a été enregistré : \n" 
-				+ controle.afficherRapportEnregistrementTextuel());
-		
-		/* Affichage de la ligne désignée par son numéro. */
-		System.out.println();
-		System.out.println(lectureLigne);
-		
-		/* Affichage du fichier ligne par ligne lu par charset. */
-		System.out.println();
-		System.out.println(lectureLigneParLigne);
-		
-		System.out.println();
-		System.out.println(caracteres);
-		
-		
-		System.out.println();
-		System.out.println("Fichier a de bonnes longueurs de ligne : " 
-				+ bonneLongueurs);
-		
-	} // Fin de testControlerDarwin2012()._________________________________
+//	public void testControlerDarwin2012() {
+//		
+//		/* Instanciation d'un ControleurEncodage 
+//		 * avec le constructeur d'arité nulle. */
+//		final ControleurEncodage controle = new ControleurEncodage();
+//		
+//		/* ******************************************************************/
+//		/* Détermination du fichier, du charset et de la ligne à lire. ******/
+//		final File fichier = FILE_DARWIN2012;
+//		final Charset charset = CHARSET_UTF8;
+//		final int numeroLigne = 1;
+//		/* ******************************************************************/
+//		
+//		/* Passe charset au controle. */
+//		controle.setCharset(charset);
+//		
+//		/* résultat du contrôle d'encodage. */
+//		final boolean resultat 
+//			= controle.controler(fichier, false);
+//		
+//		/* Lit le fichier ligne par ligne dans le fichier avec charset. */
+//		/* Remplit la SortedMap qui encapsule le fichier 
+//		 * sous forme de lignes. */
+//		final String lectureLigneParLigne 
+//			= controle.lireFichierLigneParLigne(fichier, charset);
+//		
+//		/* Lit une ligne donnée dans le fichier avec charset. */
+//		final String lectureLigne 
+//			= controle.lireLigneFichier(numeroLigne, fichier, charset);
+//		
+//		/* Liste la ligne donnée caractère par caractère 
+//		 * en éditant les valeurs unicode. */
+//		final String caracteres 
+//			= controle.listerChaineCarParCar(lectureLigne);
+//		
+//		/* résultat du contrôle de bonnes longueurs des lignes. */
+//		final boolean bonneLongueurs 
+//			= this.controlerLongueursLignes(controle.getFichierEnMap(), 520);
+//		
+//
+//		
+//		// AFFICHAGES. ********************
+//		/* Résultat de la lecture par le Charset*/
+//		System.out.println();
+//		System.out.println("Fichier écrit dans l'encodage " 
+//				+ charset.name() + " : " + resultat);
+//		
+//		/* Affichage de l'enregistrement sur disque du rapport de contrôle. */
+//		System.out.println();
+//		System.out.println("Un rapport de contrôle a été enregistré : \n" 
+//				+ controle.afficherRapportEnregistrementTextuel());
+//		
+//		/* Affichage de la ligne désignée par son numéro. */
+//		System.out.println();
+//		System.out.println(lectureLigne);
+//		
+//		/* Affichage du fichier ligne par ligne lu par charset. */
+//		System.out.println();
+//		System.out.println(lectureLigneParLigne);
+//		
+//		System.out.println();
+//		System.out.println(caracteres);
+//		
+//		
+//		System.out.println();
+//		System.out.println("Fichier a de bonnes longueurs de ligne : " 
+//				+ bonneLongueurs);
+//		
+//		assertTrue(BIDON, 1 == 1);
+//		
+//	} // Fin de testControlerDarwin2012()._________________________________
 	
 	
 	
@@ -1239,74 +1239,75 @@ public class ControleurEncodageTest {
 	 * <br/>
 	 */
 //	@Test
-	public void testControler() {
-		
-		/* Instanciation d'un ControleurEncodage 
-		 * avec le constructeur d'arité nulle. */
-		final ControleurEncodage controle = new ControleurEncodage();
-		
-		/* ******************************************************************/
-		/* Détermination du fichier, du charset et de la ligna à lire. ******/
-		final File fichier = FILE_HITDIRO2014;
-		final Charset charset = CHARSET_IBM850;
-		final int numeroLigne = 594;
-		/* ******************************************************************/
-		
-		/* Passe charset au controle. */
-		controle.setCharset(charset);
-		
-		/* résultat du contrôle d'encodage. */
-		final boolean resultat = controle.controler(fichier, true);
-		
-		/* Lit une ligne donnée dans le fichier avec charset. */
-		final String lectureLigne 
-			= controle.lireLigneFichier(numeroLigne, fichier, charset);
-		
-		
-		/* Lit le fichier ligne par ligne dans le fichier avec charset. */
-		/* Remplit la SortedMap qui encapsule le fichier sous forme de lignes. */
-		final String lectureLigneParLigne 
-			= controle.lireFichierLigneParLigne(fichier, charset);
-		
-		/* Liste la ligne donnée caractère par caractère en éditant les valeurs unicode. */
-		final String caracteres 
-			= controle.listerChaineCarParCar(lectureLigne);
-		
-		
-		/* résultat du contrôle de bonnes longueurs des lignes. */
-		final boolean bonneLongueurs 
-			= this.controlerLongueursLignes(controle.getFichierEnMap(), 520);
-		
-		// AFFICHAGES. ********************
-		/* Résultat de la lecture par le Charset*/
-		System.out.println();
-		System.out.println("Fichier écrit dans l'encodage " + charset.name() + " : " + resultat);
-		
-		/* Affichage de l'enregistrement sur disque du rapport de contrôle. */
-		System.out.println();
-		System.out.println("Un rapport de contrôle a été enregistré : \n" + controle.afficherRapportEnregistrementTextuel());
-		
-		/* Affichage de la ligne désignée par son numéro. */
-		System.out.println();
-		System.out.println("ligne numéro " + numeroLigne + " : " + lectureLigne);
-		
-		/* Affichage du fichier ligne par ligne lu par charset. */
-		System.out.println();
-		System.out.println(lectureLigneParLigne);
-		
-		
-		System.out.println();
-		System.out.println(caracteres);
-		
-		
-		System.out.println();
-		System.out.println("Fichier a de bonnes longueurs de ligne : " + bonneLongueurs);
-		
+//	public void testControler() {
+//		
+//		/* Instanciation d'un ControleurEncodage 
+//		 * avec le constructeur d'arité nulle. */
+//		final ControleurEncodage controle = new ControleurEncodage();
+//		
+//		/* ******************************************************************/
+//		/* Détermination du fichier, du charset et de la ligna à lire. ******/
+//		final File fichier = FILE_HITDIRO2014;
+//		final Charset charset = CHARSET_IBM850;
+//		final int numeroLigne = 594;
+//		/* ******************************************************************/
+//		
+//		/* Passe charset au controle. */
+//		controle.setCharset(charset);
+//		
+//		/* résultat du contrôle d'encodage. */
+//		final boolean resultat = controle.controler(fichier, true);
+//		
+//		/* Lit une ligne donnée dans le fichier avec charset. */
+//		final String lectureLigne 
+//			= controle.lireLigneFichier(numeroLigne, fichier, charset);
+//		
+//		
+//		/* Lit le fichier ligne par ligne dans le fichier avec charset. */
+//		/* Remplit la SortedMap qui encapsule le fichier sous forme de lignes. */
+//		final String lectureLigneParLigne 
+//			= controle.lireFichierLigneParLigne(fichier, charset);
+//		
+//		/* Liste la ligne donnée caractère par caractère en éditant les valeurs unicode. */
+//		final String caracteres 
+//			= controle.listerChaineCarParCar(lectureLigne);
+//		
+//		
+//		/* résultat du contrôle de bonnes longueurs des lignes. */
+//		final boolean bonneLongueurs 
+//			= this.controlerLongueursLignes(controle.getFichierEnMap(), 520);
+//		
+//		// AFFICHAGES. ********************
+//		/* Résultat de la lecture par le Charset*/
+//		System.out.println();
+//		System.out.println("Fichier écrit dans l'encodage " + charset.name() + " : " + resultat);
+//		
+//		/* Affichage de l'enregistrement sur disque du rapport de contrôle. */
+//		System.out.println();
+//		System.out.println("Un rapport de contrôle a été enregistré : \n" + controle.afficherRapportEnregistrementTextuel());
+//		
+//		/* Affichage de la ligne désignée par son numéro. */
+//		System.out.println();
+//		System.out.println("ligne numéro " + numeroLigne + " : " + lectureLigne);
+//		
+//		/* Affichage du fichier ligne par ligne lu par charset. */
+//		System.out.println();
+//		System.out.println(lectureLigneParLigne);
+//		
+//		
+//		System.out.println();
+//		System.out.println(caracteres);
+//		
+//		
+//		System.out.println();
+//		System.out.println("Fichier a de bonnes longueurs de ligne : " + bonneLongueurs);
+//		
+//		assertTrue(BIDON, 1 == 1);
 		
 //		System.out.println();
 //		System.out.println("Nombre de caractères imprimables : " + this.donnerNombreCaracteresImprimables(lectureLigne, charset));
 		
-	} // Fin de testControler().___________________________________________
+//	} // Fin de testControler().___________________________________________
 
 
 	
@@ -1321,149 +1322,149 @@ public class ControleurEncodageTest {
 	 * @param pLongueur
 	 * @return : boolean :  .<br/>
 	 */
-	public final boolean controlerLongueursLignes(
-			final Map<Integer, String> pMap
-				, final int pLongueur) {
-		
-		boolean resultat = true;
-		
-		final Set<Entry<Integer, String>> set = pMap.entrySet();
-		
-		final Iterator<Entry<Integer, String>> ite = set.iterator();
-		
-		while (ite.hasNext()) {
-			
-			final Entry<Integer, String> entry = ite.next();
-			
-			final int numeroLigne = entry.getKey();
-			final String ligne = entry.getValue();
-			
-			final int longueurLigne = ligne.length();
-			
-			if (longueurLigne != pLongueur) {
-				System.out.println("la ligne " + numeroLigne + " a une mauvaise longueur de " + longueurLigne);
-				resultat = false;
-			}
-		}
-		
-		return resultat;
-		
-	} // Fin de controlerLongueursLignes(
+//	public final boolean controlerLongueursLignes(
+//			final Map<Integer, String> pMap
+//				, final int pLongueur) {
+//		
+//		boolean resultat = true;
+//		
+//		final Set<Entry<Integer, String>> set = pMap.entrySet();
+//		
+//		final Iterator<Entry<Integer, String>> ite = set.iterator();
+//		
+//		while (ite.hasNext()) {
+//			
+//			final Entry<Integer, String> entry = ite.next();
+//			
+//			final int numeroLigne = entry.getKey();
+//			final String ligne = entry.getValue();
+//			
+//			final int longueurLigne = ligne.length();
+//			
+//			if (longueurLigne != pLongueur) {
+//				System.out.println("la ligne " + numeroLigne + " a une mauvaise longueur de " + longueurLigne);
+//				resultat = false;
+//			}
+//		}
+//		
+//		return resultat;
+//		
+//	} // Fin de controlerLongueursLignes(
 	 // Map<Integer, String> pMap
 	 // , int pLongueur).__________________________________________________
 	
 
 	
-	/**
-	 * method donnerNombreCaracteresImprimables(
-	 * String pString
-	 * , Charset pCharset) :<br/>
-	 * .<br/>
-	 * <br/>
-	 *
-	 * @param pString
-	 * @param pCharset
-	 * 
-	 * @return : int :  .<br/>
-	 */
-	public final int donnerNombreCaracteresImprimables(
-			final String pString
-				, final Charset pCharset) {
-
-		final StringBuilder builderOriginal = new StringBuilder();
-		final StringBuilder builderPlateforme = new StringBuilder();
-		
-		String decodeeOriginal = null;
-		String decodeePlateforme = null;
-		
-		try {
-			
-			/* Transforme pString en tableau byte[] décodé 
-			 * avec le Charset d'origine. */
-			final byte[] originalBytes 
-				= pString.getBytes(pCharset);
-			/* Transforme pString en tableau byte[] décodé 
-			 * avec le Charset de la plateforme. */
-			final byte[] plateformeBytes 
-				= pString.getBytes(System.getProperty("file.encoding"));
-			
-			
-			/* Met le byte[] décodé avec le Charset d'origine 
-			 * dans un InputStream. */
-			final InputStream inputStreamOriginal 
-				= new ByteArrayInputStream(originalBytes);
-			/* Met le byte[] décodé avec le Charset de la plateforme
-			 * dans un InputStream. */
-			final InputStream inputStreamPlateforme 
-				= new ByteArrayInputStream(plateformeBytes);
-
-			/* Crée un buffer ne contenant qu'un seul caractère pour la chaîne originale. */
-			final byte[] bufferCaractereOriginal = new byte[1];
-			
-			/* Crée un buffer ne contenant qu'un seul caractère pour la chaîne lue par la plateforme. */
-			final byte[] bufferCaracterePlateforme = new byte[1];
-
-			/* Parcours de la chaîne de caractères. */
-			while (true) {
-
-				// Lecture de chaque caractère dans le Buffer de 1 byte dans la chaîne original.
-				final int caractereEntierOriginal 
-					= inputStreamOriginal.read(bufferCaractereOriginal);
-				
-				// Lecture de chaque caractère dans le Buffer de 1 byte dans la chaîne original.
-				final int caractereEntierPlateforme 
-					= inputStreamPlateforme.read(bufferCaracterePlateforme);
-
-				/* Sort de la lecture à la fin de la String. */
-				if (caractereEntierOriginal < 0 || caractereEntierPlateforme < 0) {
-					break;
-				}
-				
-				final char caractereLuOriginal = (char) bufferCaractereOriginal[0];
-				final char caractereLuPlateforme = (char) bufferCaracterePlateforme[0];
-				
-
-				
-//				final String data = new String(buffer, 0, caractereEntier,
-//						pCharset);
-//				builder.append(data);
-				
-				builderOriginal.append(caractereLuOriginal);
-				builderPlateforme.append(caractereLuPlateforme);
-				
-				decodeeOriginal = builderOriginal.toString();
-				decodeePlateforme = builderPlateforme.toString();
-				
-				System.out.println("decodeeOriginal   : " + decodeeOriginal);
-				System.out.println("decodeePlateforme : " + decodeePlateforme);
-				
-				if (caractereLuOriginal != caractereLuPlateforme) {
-					System.out.println("ATTENTION - CARACTERES DIFFERENTS : " + "original : " + caractereLuOriginal + " - plateforme : " + caractereLuPlateforme);
-				}
-
-			} // Fin de Parcours de la chaîne de caractères.____________
-			
-			
-			decodeeOriginal = builderOriginal.toString();
-			System.out.println("decodeeOriginal   : " + decodeeOriginal);
-			
-			decodeePlateforme = builderOriginal.toString();
-			System.out.println("decodeePlateforme : " + decodeePlateforme);
-			
-			if (decodeeOriginal.length() != decodeePlateforme.length()) {
-				System.out.println("ATTENTION DECALAGE");
-			}
-			
-		} catch (Exception e) {
-
-			e.printStackTrace();
-			return 0;
-		}
-
-		
-		return decodeeOriginal.length();
-
-	}
+//	/**
+//	 * method donnerNombreCaracteresImprimables(
+//	 * String pString
+//	 * , Charset pCharset) :<br/>
+//	 * .<br/>
+//	 * <br/>
+//	 *
+//	 * @param pString
+//	 * @param pCharset
+//	 * 
+//	 * @return : int :  .<br/>
+//	 */
+//	public final int donnerNombreCaracteresImprimables(
+//			final String pString
+//				, final Charset pCharset) {
+//
+//		final StringBuilder builderOriginal = new StringBuilder();
+//		final StringBuilder builderPlateforme = new StringBuilder();
+//		
+//		String decodeeOriginal = null;
+//		String decodeePlateforme = null;
+//		
+//		try {
+//			
+//			/* Transforme pString en tableau byte[] décodé 
+//			 * avec le Charset d'origine. */
+//			final byte[] originalBytes 
+//				= pString.getBytes(pCharset);
+//			/* Transforme pString en tableau byte[] décodé 
+//			 * avec le Charset de la plateforme. */
+//			final byte[] plateformeBytes 
+//				= pString.getBytes(System.getProperty("file.encoding"));
+//			
+//			
+//			/* Met le byte[] décodé avec le Charset d'origine 
+//			 * dans un InputStream. */
+//			final InputStream inputStreamOriginal 
+//				= new ByteArrayInputStream(originalBytes);
+//			/* Met le byte[] décodé avec le Charset de la plateforme
+//			 * dans un InputStream. */
+//			final InputStream inputStreamPlateforme 
+//				= new ByteArrayInputStream(plateformeBytes);
+//
+//			/* Crée un buffer ne contenant qu'un seul caractère pour la chaîne originale. */
+//			final byte[] bufferCaractereOriginal = new byte[1];
+//			
+//			/* Crée un buffer ne contenant qu'un seul caractère pour la chaîne lue par la plateforme. */
+//			final byte[] bufferCaracterePlateforme = new byte[1];
+//
+//			/* Parcours de la chaîne de caractères. */
+//			while (true) {
+//
+//				// Lecture de chaque caractère dans le Buffer de 1 byte dans la chaîne original.
+//				final int caractereEntierOriginal 
+//					= inputStreamOriginal.read(bufferCaractereOriginal);
+//				
+//				// Lecture de chaque caractère dans le Buffer de 1 byte dans la chaîne original.
+//				final int caractereEntierPlateforme 
+//					= inputStreamPlateforme.read(bufferCaracterePlateforme);
+//
+//				/* Sort de la lecture à la fin de la String. */
+//				if (caractereEntierOriginal < 0 || caractereEntierPlateforme < 0) {
+//					break;
+//				}
+//				
+//				final char caractereLuOriginal = (char) bufferCaractereOriginal[0];
+//				final char caractereLuPlateforme = (char) bufferCaracterePlateforme[0];
+//				
+//
+//				
+////				final String data = new String(buffer, 0, caractereEntier,
+////						pCharset);
+////				builder.append(data);
+//				
+//				builderOriginal.append(caractereLuOriginal);
+//				builderPlateforme.append(caractereLuPlateforme);
+//				
+//				decodeeOriginal = builderOriginal.toString();
+//				decodeePlateforme = builderPlateforme.toString();
+//				
+//				System.out.println("decodeeOriginal   : " + decodeeOriginal);
+//				System.out.println("decodeePlateforme : " + decodeePlateforme);
+//				
+//				if (caractereLuOriginal != caractereLuPlateforme) {
+//					System.out.println("ATTENTION - CARACTERES DIFFERENTS : " + "original : " + caractereLuOriginal + " - plateforme : " + caractereLuPlateforme);
+//				}
+//
+//			} // Fin de Parcours de la chaîne de caractères.____________
+//			
+//			
+//			decodeeOriginal = builderOriginal.toString();
+//			System.out.println("decodeeOriginal   : " + decodeeOriginal);
+//			
+//			decodeePlateforme = builderOriginal.toString();
+//			System.out.println("decodeePlateforme : " + decodeePlateforme);
+//			
+//			if (decodeeOriginal.length() != decodeePlateforme.length()) {
+//				System.out.println("ATTENTION DECALAGE");
+//			}
+//			
+//		} catch (Exception e) {
+//
+//			e.printStackTrace();
+//			return 0;
+//		}
+//
+//		
+//		return decodeeOriginal.length();
+//
+//	}
 	
 	
 	

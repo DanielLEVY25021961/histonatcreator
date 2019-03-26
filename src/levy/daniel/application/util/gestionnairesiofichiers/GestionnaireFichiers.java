@@ -1544,7 +1544,7 @@ static {
 				stb.append(pFiles[i].getPath());
 				
 				if (i < pFiles.length - 1) {
-					stb.append(";");
+					stb.append(';');
 				}				
 			}
 			

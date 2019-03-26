@@ -39,7 +39,6 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	levy.daniel.application.metier.service.enregistreursfichiers.impl.EnregistreurFichiersTest.class
-	, levy.daniel.application.metier.controles.impl.controlessurface.ControleurTypeTexteTest.class
 	, levy.daniel.application.metier.controles.impl.controlessurface.ControleurEncodageTest.class
 	, levy.daniel.application.metier.controles.impl.controlessurface.ControleurHITTest.class
 	, levy.daniel.application.metier.controles.impl.controlessurface.ControleurDARWINcsvTest.class

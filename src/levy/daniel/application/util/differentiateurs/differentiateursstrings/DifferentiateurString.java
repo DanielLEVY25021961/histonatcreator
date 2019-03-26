@@ -300,50 +300,6 @@ public final class DifferentiateurString {
 	 */
 	public static final Locale LOCALE_SYSTEM = Locale.getDefault();
 	
-
-	/**
-	 * DF_DATE_LEXICOGRAPHIQUE : DateFormat :<br/>
-	 * Format lexicographique des dates 
-	 * comme "2012-01-16" pour le
-	 * 16 Janvier 2012.<br/>
-	 * "yyyy-MM-dd".<br/>
-	 */
-	public static final DateFormat DF_DATE_LEXICOGRAPHIQUE 
-		= new SimpleDateFormat("yyyy-MM-dd", LOCALE_FR_FR);
-	
-	
-	/**
-	 * DF_DATETIME_LEXICOGRAPHIQUE : DateFormat :<br/>
-	 * Format lexicographique des dates avec time 
-	 * comme "2012-01-16_18-09-55" pour le
-	 * 16 Janvier 2012 à 18 heures 9 minutes et 55 secondes.<br/>
-	 * "yyyy-MM-dd_HH-mm-ss".<br/>
-	 */
-	public static final DateFormat DF_DATETIME_LEXICOGRAPHIQUE 
-		= new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", LOCALE_FR_FR);
-	
-
-	/**
-	 * DF_DATETIME_LEXICOGRAPHIQUEMILLI : DateFormat :<br/>
-	 * Format lexicographique des dates avec time 
-	 * comme "2012-01-16_18-09-55-769" pour le
-	 * 16 Janvier 2012 à 18 heures 9 minutes,55 secondes et 769 millisecondes.<br/>
-	 * "yyyy-MM-dd_HH-mm-ss-SSS".<br/>
-	 */
-	public static final DateFormat DF_DATETIME_LEXICOGRAPHIQUEMILLI 
-		= new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss-SSS", LOCALE_FR_FR);
-
-	
-	/**
-	 * DF_DATE_HEURE_MINUTE_SECONDE_UNDERSCORE : DateFormat :<br/>
-	 * Format concentré des dates avec heures et secondes
-	 * comme "2012-01-16_18-09-55" pour le
-	 * 16 Janvier 2012 à 18 heures 9 minutes et 55 secondes.<br/>
-	 */
-	public static final DateFormat DF_DATE_HEURE_MINUTE_SECONDE_UNDERSCORE 
-		= new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", LOCALE_FR_FR);
-	
-	
 	/**
 	 * CHARSET_UTF8 : Charset :<br/>
 	 * Charset.forName("UTF-8").<br/>
@@ -1437,8 +1393,11 @@ public final class DifferentiateurString {
 			
 			/* Récupère la date  
 			 * formattée sous la forme 2012-01-16_18-09-55-759. */
+			final DateFormat dfDateMilli 
+				= new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss-SSS", LOCALE_FR_FR);
+			
 			final String dateFormatteeString 
-				= fournirDateFormattee(date, DF_DATETIME_LEXICOGRAPHIQUEMILLI);
+				= fournirDateFormattee(date, dfDateMilli);
 			
 			final StringBuilder stb = new StringBuilder();
 			
@@ -1894,7 +1853,7 @@ public final class DifferentiateurString {
 				stb.append(pFiles[i].getPath());
 				
 				if (i < pFiles.length - 1) {
-					stb.append(";");
+					stb.append(';');
 				}				
 			}
 			
